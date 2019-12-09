@@ -8,10 +8,11 @@ var scatterChartData = {
         data: data
     }]
 };
-var ctx = document.getElementById('myChart').getContext('2d');
-ctx.canvas.height = 500;
-ctx.canvas.width = 500;
+
 window.onload = function() {
+    var ctx = document.getElementById('myChart');
+    ctx.canvas.height = 500;
+    ctx.canvas.width = 500;
     window.myScatter = new Chart(ctx, {
         type: 'line',
         data: scatterChartData,
