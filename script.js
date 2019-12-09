@@ -10,7 +10,7 @@ var scatterChartData = {
 };
 
 window.onload = function() {
-    var ctx = document.getElementById('myChart');
+    var ctx = document.getElementById('myChart').getContext('2d');
     ctx.canvas.height = 500;
     ctx.canvas.width = 500;
     window.myScatter = new Chart(ctx, {
