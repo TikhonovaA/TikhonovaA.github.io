@@ -7,24 +7,16 @@
 
     <title>Пример</title>
     <script src="node_modules/chart.js/dist/Chart.js"></script>
+    <script>
+        data = [{x: 10, y: 10}, {x: 100, y: 100},{x: 1000, y: 1000},{x: 10000, y: 10000},{x: 100000, y: 100000}];
 
-</head>
-
-<body>
-
-<div>Hello</div>
-<canvas id="myChart" width="400" height="400"></canvas>
-
-<script>
-    data = [{x: 10, y: 10}, {x: 100, y: 100},{x: 1000, y: 1000},{x: 10000, y: 10000},{x: 100000, y: 100000}];
-
-    var scatterChartData = {
-        datasets: [{
-            pointBorderWidth: 0,
-            pointRadius: 5,
-            data: data
-        }]
-    };
+        var scatterChartData = {
+            datasets: [{
+                pointBorderWidth: 0,
+                pointRadius: 5,
+                data: data
+            }]
+        };
 
         var ctx = document.getElementById('myChart');
         var myScatter = new Chart(ctx, {
@@ -43,7 +35,15 @@
         });
 
 
-</script>
+    </script>
+
+</head>
+
+<body>
+
+<div>Hello</div>
+<canvas id="myChart" width="400" height="400"></canvas>
+
 
 </body>
 
