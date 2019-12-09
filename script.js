@@ -8,19 +8,20 @@ var scatterChartData = {
         data: data
     }]
 };
-
-var ctx = document.getElementById('myChart');
-window.myScatter = new Chart(ctx, {
-    type: 'line',
-    data: scatterChartData,
-    options: {
-        scales: {
-            xAxes:[{
-                type: "logarithmic",
-                ticks: {
-                    min: 0,
-                }
-            }],
-        }
-    },
-});
+window.onload = function() {
+    var ctx = document.getElementById('myChart');
+    window.myScatter = new Chart(ctx, {
+        type: 'line',
+        data: scatterChartData,
+        options: {
+            scales: {
+                xAxes:[{
+                    type: "logarithmic",
+                    ticks: {
+                        min: 0,
+                    }
+                }],
+            }
+        },
+    });
+}
