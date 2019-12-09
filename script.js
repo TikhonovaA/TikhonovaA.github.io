@@ -10,7 +10,7 @@ var scatterChartData = {
 };
 
 var ctx = document.getElementById('myChart');
-var myScatter = new Chart(ctx, {
+window.myScatter = new Chart(ctx, {
     type: 'line',
     data: scatterChartData,
     options: {
