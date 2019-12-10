@@ -3,3 +3,47 @@ canvas {
     -webkit-user-select: none;
     -ms-user-select: none;
 }
+
+.mode, .chartCont, .tools{
+    display: inline-block; /*Задаем блочно-строчное отображение*/
+    vertical-align: top;
+}
+
+.tools{
+    margin-top: 30px;
+    margin-left: 50px;
+}
+
+.nav{
+    horiz-align: left;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    width: 215px;
+    height: 30px;
+    text-decoration: none;
+    padding-top: 9px;
+    color: #000000;
+    text-align: center;
+    line-height: 20px;
+    display: block;
+    margin: 20px auto;
+    font: normal 14px arial;
+}
+
+.buttons:not(.active) {
+    box-shadow:  inset 0 -1px 0 rgba(63, 59, 113, 0.2), 0 3px 4px 0 rgba(0, 0, 0, 0.3), 0 4px 3px 0 rgba(0, 0, 0, 0.3), 0 0 0 1px #150a1e;
+    background-image: linear-gradient(#e6e6ff, #b3b3ff);
+    text-shadow: 0 0 21px rgba(223, 206, 228, 0.5), 0 -1px 0 #311d47;
+}
+
+.buttons:not(.active):hover,
+.buttons:not(.active):focus {
+    transition: color 200ms linear, text-shadow 500ms linear;
+    color: #fff;
+    text-shadow: 0 0 21px rgba(223, 206, 228, 0.5), 0 0 10px rgba(223, 206, 228, 0.4), 0 0 2px #2a153c;
+}
+.buttons:not(:hover) {
+    transition: 0.6s;
+}

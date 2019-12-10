@@ -13,11 +13,82 @@
 <body>
 <script src="script.js"></script>
 
-<div id="chartCont" style="height: 600px; width: 600px">
+<div class="mode" style="width: 215px; margin-top: 100px">
+    <input class="buttons" id="e_mobility" type="button" value="Electron mobility" style="width: 215px">
+    <input class="buttons" id="h_mobility" type="button" value="Hole mobility" style="width: 215px">
+    <input class="buttons" id="e_concentr" type="button" value="Electron concentration" style="width: 215px">
+    <input class="buttons" id="h_concentr" type="button" value="Hole concentration" style="width: 215px">
+    <input class="buttons" id="ch_el_concentr" type="button" value="Charged electron concentration" style="width: 215px">
+    <input class="buttons" id="ch_h_concentr" type="button" value="Charged hole concentration" style="width: 215px">
+    <input class="buttons" id="conduct" type="button" value="Conductivity" style="width: 215px">
+</div>
+
+<div class="chartCont" style="height: 600px; width: 600px">
     <canvas id="myChart" width="600" height="600"></canvas>
 </div>
-<p><input id="logscale" type="checkbox"  id="logscale" value=0 >logarithmic scale<Br>
 
+<div class="tools">
+    <div class="nav">
+        <label for="mySelectId">Material</label>
+        <select class="nav" id="mySelectId" name="mySelect" style="margin-left: 10px">
+            <option value="si"> Si </option>
+            <option value="ge"> Ge </option>
+            <option value="ga_as"> GaAs </option>
+        </select>
+    </div>
+    <div class="nav">
+        <label for="ed">Ed</label>
+        <input id="ed" type="number" min="0" max="100" step="0.01" value="0.1" style="margin-left: 10px"><label style="margin-left: 10px"/>eV
+    </div>
+    <div class="nav">
+        <label for="nd">Nd</label>
+        <input id="nd" type="range" max="1000" min="0" value="10" step="1" list="range" style="width: 170px" onchange="document.getElementById('nd_val').value = this.value;">
+        <datalist id="range">
+            <option value="0" label="0">
+            <option value="200" label="200">
+            <option value="400" label="400">
+            <option value="600" label="600">
+            <option value="800" label="800">
+            <option value="1000" label="1000">
+        </datalist>
+        <input id="nd_val" type="number" min="0" max="1000" step="1" value="10" style="margin-left: 10px" onchange="document.getElementById('nd').value = this.value;"><label style="margin-left: 10px"><span>*10</span><sup>15</sup><span> cm</span><sup>-3</sup></label>
+    </div>
+    <div class="nav">
+        <label for="ea">Ea</label>
+        <input id="ea" type="number" min="0" max="100" step="0.01" value="0.1" style="margin-left: 10px"><label style="margin-left: 10px"/>eV
+    </div>
+    <div class="nav">
+        <label for="na">Na</label>
+        <input id="na" type="range" max="1000" min="0" value="0" step="1" list="range_a" style="width: 170px" onchange="document.getElementById('na_val').value = this.value;">
+        <datalist id="range_a">
+            <option value="0" label="0">
+            <option value="200" label="200">
+            <option value="400" label="400">
+            <option value="600" label="600">
+            <option value="800" label="800">
+            <option value="1000" label="1000">
+        </datalist>
+        <input id="na_val" type="number" min="0" max="1000" step="1" value="0" style="margin-left: 10px" onchange="document.getElementById('na').value = this.value;"><label style="margin-left: 10px"><span>*10</span><sup>15</sup><span> cm</span><sup>-3</sup></label>
+    </div>
+    <div class="nav">
+        <label for="t_min">Tmin</label>
+        <input id="t_min" type="number" min="0" max="1000" step="1" value="200" style="margin-left: 10px"><label style="margin-left: 10px"/>K
+    </div>
+    <div class="nav">
+        <label for="t_max">Tmax</label>
+        <input id="t_max" type="number" min="0" max="1000" step="1" value="1000" style="margin-left: 10px"><label style="margin-left: 10px"/>K
+    </div>
+    <div class="nav">
+        <label for="dt">dT</label>
+        <input id="dt" type="number" min="1" max="100" step="1" value="10" style="margin-left: 10px"><label style="margin-left: 10px"/>K
+    </div>
+    <div class="nav">
+        <p><input id="logscale" type="checkbox" value=0 >logarithmic scale<Br>
+    </div>
+    <div class="nav">
+        <p><input id="1_t" type="checkbox" value=0 ><label style="margin-left: 10px"/>1/T
+    </div>
+</div>
 </body>
 
 </html>
