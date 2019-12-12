@@ -28,6 +28,7 @@ window.onload = function() {
                     type: "linear",
                     ticks: {
                         min: 0,
+                        //приводим числа на оси к виду 10^n
                         callback: function(value) {
                             if (document.getElementById('logscale').value == 1) {
                                 if((value === 0) || (value === 1) || (value === 10) || (value === 100)) return value;
