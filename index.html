@@ -14,13 +14,13 @@
 <script src="script.js"></script>
 
 <div class="mode" style="width: 215px; margin-top: 100px">
-    <input class="buttons" id="e_mobility" type="button" value="Electron mobility" style="width: 215px">
-    <input class="buttons" id="h_mobility" type="button" value="Hole mobility" style="width: 215px">
-    <input class="buttons" id="e_concentr" type="button" value="Electron concentration" style="width: 215px">
-    <input class="buttons" id="h_concentr" type="button" value="Hole concentration" style="width: 215px">
-    <input class="buttons" id="ch_el_concentr" type="button" value="Charged electron concentration" style="width: 215px">
-    <input class="buttons" id="ch_h_concentr" type="button" value="Charged hole concentration" style="width: 215px">
-    <input class="buttons" id="conduct" type="button" value="Conductivity" style="width: 215px">
+    <input class="buttons" id="e_mobility" type="button" value="Electron mobility" onclick="changeMode(this.value)" style="width: 215px">
+    <input class="buttons" id="h_mobility" type="button" value="Hole mobility" onclick="changeMode(this.value)" style="width: 215px">
+    <input class="buttons" id="e_concentr" type="button" value="Electron concentration" onclick="changeMode(this.value)" style="width: 215px">
+    <input class="buttons" id="h_concentr" type="button" value="Hole concentration" onclick="changeMode(this.value)" style="width: 215px">
+    <input class="buttons" id="ch_el_concentr" type="button" value="Charged electron concentration" onclick="changeMode(this.value)" style="width: 215px">
+    <input class="buttons" id="ch_h_concentr" type="button" value="Charged hole concentration" onclick="changeMode(this.value)" style="width: 215px">
+    <input class="buttons" id="conduct" type="button" value="Conductivity" onclick="changeMode(this.value)" style="width: 215px">
 </div>
 
 <div class="chartCont" style="height: 600px; width: 600px">
@@ -29,11 +29,11 @@
 
 <div class="tools">
     <div class="nav">
-        <label for="mySelectId">Material</label>
-        <select class="nav" id="mySelectId" name="mySelect" style="margin-left: 10px">
-            <option value="si"> Si </option>
-            <option value="ge"> Ge </option>
-            <option value="ga_as"> GaAs </option>
+        <label for="select">Material</label>
+        <select class="nav" id="select" name="mySelect" style="margin-left: 10px">
+            <option value="Si"> Si </option>
+            <option value="Ge"> Ge </option>
+            <option value="GaAs"> GaAs </option>
         </select>
     </div>
     <div class="nav">
