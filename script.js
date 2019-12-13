@@ -189,19 +189,19 @@ window.onload = function() {
     });
 
     document.getElementById('t_max').addEventListener('change', function () {
-        params.TMax = document.getElementById('t_max').value;
+        params.TMax = Number(document.getElementById('t_max').value);
         fillArrays();
         redraw()
     });
 
     document.getElementById('t_min').addEventListener('change', function () {
-        params.TMin = document.getElementById('t_mim').value;
+        params.TMin = Number(document.getElementById('t_min').value);
         fillArrays();
         redraw()
     });
 
     document.getElementById('dt').addEventListener('change', function () {
-        params.TCount = document.getElementById('dt').value;
+        params.TCount = Number(document.getElementById('dt').value);
         fillArrays();
         redraw()
     });
@@ -213,31 +213,31 @@ window.onload = function() {
     });
 
     document.getElementById('ea').addEventListener('change', function () {
-        params.Ea = document.getElementById('ea').value;
+        params.Ea = Number(document.getElementById('ea').value);
         fillArrays();
         redraw()
     });
 
     document.getElementById('nd_val').addEventListener('change', function () {
-        params.Nd0 = document.getElementById('nd_val').value*Math.pow(10,15);
+        params.Nd0 = Number(document.getElementById('nd_val').value*Math.pow(10,15));
         fillArrays();
         redraw()
     });
 
     document.getElementById('nd').addEventListener('change', function () {
-        params.Nd0 = document.getElementById('nd').value*Math.pow(10,15);
+        params.Nd0 = Number(document.getElementById('nd').value*Math.pow(10,15));
         fillArrays();
         redraw()
     });
 
     document.getElementById('na_val').addEventListener('change', function () {
-        params.Na0 = document.getElementById('na_val').value*Math.pow(10,15);
+        params.Na0 = Number(document.getElementById('na_val').value*Math.pow(10,15));
         fillArrays();
         redraw()
     });
 
     document.getElementById('na').addEventListener('change', function () {
-        params.Na0 = document.getElementById('na').value*Math.pow(10,15);
+        params.Na0 = Number(document.getElementById('na').value*Math.pow(10,15));
         fillArrays();
         redraw()
     });
