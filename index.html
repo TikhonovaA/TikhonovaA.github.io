@@ -13,18 +13,18 @@
 <body>
 <script src="script.js"></script>
 
-<div class="mode" style="width: 215px; margin-top: 100px">
+<div class="mode" style="width: 215px; margin-top: 40px">
     <input class="buttons" id="e_mobility" type="button" value="Electron mobility" onclick="changeMode(this.value)" style="width: 215px">
     <input class="buttons" id="h_mobility" type="button" value="Hole mobility" onclick="changeMode(this.value)" style="width: 215px">
     <input class="buttons" id="e_concentr" type="button" value="Electron concentration" onclick="changeMode(this.value)" style="width: 215px">
     <input class="buttons" id="h_concentr" type="button" value="Hole concentration" onclick="changeMode(this.value)" style="width: 215px">
-    <input class="buttons" id="ch_el_concentr" type="button" value="Charged electron concentration" onclick="changeMode(this.value)" style="width: 215px">
-    <input class="buttons" id="ch_h_concentr" type="button" value="Charged hole concentration" onclick="changeMode(this.value)" style="width: 215px">
+    <input class="buttons" id="ch_el_concentr" type="button" value="Charged donor concentration" onclick="changeMode(this.value)" style="width: 215px">
+    <input class="buttons" id="ch_h_concentr" type="button" value="Charged acceptor concentration" onclick="changeMode(this.value)" style="width: 215px">
     <input class="buttons" id="conduct" type="button" value="Conductivity" onclick="changeMode(this.value)" style="width: 215px">
 </div>
 
-<div class="chartCont" style="height: 600px; width: 600px">
-    <canvas id="myChart" width="600" height="600"></canvas>
+<div class="chartCont" style="width: 49%">
+    <canvas id="myChart" width="500" height="500"></canvas>
 </div>
 
 <div class="tools">

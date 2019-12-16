@@ -88,13 +88,41 @@ function getMobility(a,  b, NdPlus, NaMinus, T){
 function redraw(){
     data.length = 0;
     let arr = [];
-    if(mode == "Electron mobility") arr = mue;
-    else if(mode == "Hole mobility") arr = muh;
-    else if(mode == "Electron concentration") arr = n;
-    else if(mode == "Hole concentration") arr = p;
-    else if(mode == "Charged electron concentration") arr = NdPlus;
-    else if(mode == "Charged hole concentration") arr = NaMinus;
-    else if(mode == "Conductivity") arr = sigma;
+    if(mode == "Electron mobility") {
+        arr = mue;
+        window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
+        window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
+    }
+    else if(mode == "Hole mobility") {
+        arr = muh;
+        window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
+        window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
+    }
+    else if(mode == "Electron concentration") {
+        arr = n;
+        window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
+        window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
+    }
+    else if(mode == "Hole concentration") {
+        arr = p;
+        window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
+        window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
+    }
+    else if(mode == "Charged donor concentration") {
+        arr = NdPlus;
+        window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
+        window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
+    }
+    else if(mode == "Charged acceptor concentration") {
+        arr = NaMinus;
+        window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
+        window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
+    }
+    else if(mode == "Conductivity") {
+        arr = sigma;
+        window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 102, 0, 1)';
+        window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 102, 0, 1)';
+    }
     let count = 0;
     for(let i = params.TMin; i<=params.TMax; i+=params.TCount){
         let point =({x: "", y: ""});
@@ -126,16 +154,16 @@ window.onload = function() {
             pointBorderWidth: 1,
             pointRadius: 2,
             borderWidth:2,
-            borderColor: 'rgba( 33, 126, 74, 1)',
+            borderColor: 'rgba( 0, 0, 255, 1)',
             data: data,
             fill: false,
-            pointBorderColor: 'rgba( 33, 126, 74, 1)',
+            pointBorderColor: 'rgba( 0, 0, 255, 1)',
         }]
     };
 
     var ctx = document.getElementById('myChart').getContext('2d');
-    ctx.canvas.height = 600;
-    ctx.canvas.width = 600;
+    ctx.canvas.height = 500;
+    ctx.canvas.width = 500;
     window.myScatter = new Chart(ctx, {
         type: 'line',
         data: scatterChartData,
