@@ -95,7 +95,7 @@ function redraw(){
     else if(mode == "Charged electron concentration") arr = NdPlus;
     else if(mode == "Charged hole concentration") arr = NaMinus;
     else if(mode == "Conductivity") arr = sigma;
-    let count =0;
+    let count = 0;
     for(let i = params.TMin; i<=params.TMax; i+=params.TCount){
         let point =({x: "", y: ""});
         point.x = i;
@@ -124,8 +124,12 @@ window.onload = function() {
     var scatterChartData = {
         datasets: [{
             pointBorderWidth: 1,
-            pointRadius: 3,
+            pointRadius: 2,
+            borderWidth:2,
+            borderColor: 'rgba( 33, 126, 74, 1)',
             data: data,
+            fill: false,
+            pointBorderColor: 'rgba( 33, 126, 74, 1)',
         }]
     };
 
@@ -139,12 +143,12 @@ window.onload = function() {
             scales: {
                 xAxes:[{
                     type: "linear",
-                    ticks: {
+                    /*ticks: {
                         min: 0,
-                    },
+                    },*/
                     scaleLabel:{
                         display:true,
-                        labelString:"T",
+                        labelString:"T, K",
                     }
                 }],
                 yAxes:[{
