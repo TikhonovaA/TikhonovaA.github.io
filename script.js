@@ -90,36 +90,43 @@ function redraw(){
     let arr = [];
     if(mode == "Electron mobility") {
         arr = mue;
+        window.myScatter.data.datasets[0].label = 'Electron mobility';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
     }
     else if(mode == "Hole mobility") {
         arr = muh;
+        window.myScatter.data.datasets[0].label = 'Hole mobility';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
     }
     else if(mode == "Electron concentration") {
         arr = n;
+        window.myScatter.data.datasets[0].label = 'Electron concentration';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
     }
     else if(mode == "Hole concentration") {
         arr = p;
+        window.myScatter.data.datasets[0].label = 'Hole concentration';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
     }
     else if(mode == "Charged donor concentration") {
         arr = NdPlus;
+        window.myScatter.data.datasets[0].label = 'Charged donor concentration';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
     }
     else if(mode == "Charged acceptor concentration") {
         arr = NaMinus;
+        window.myScatter.data.datasets[0].label = 'Charged acceptor concentration';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
     }
     else if(mode == "Conductivity") {
         arr = sigma;
+        window.myScatter.data.datasets[0].label = 'Conductivity';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 102, 0, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 102, 0, 1)';
     }
@@ -158,6 +165,7 @@ window.onload = function() {
             data: data,
             fill: false,
             pointBorderColor: 'rgba( 0, 0, 255, 1)',
+            label: "Electron mobility",
         }]
     };
 
