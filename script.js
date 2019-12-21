@@ -197,25 +197,14 @@ window.onload = function() {
                 yAxes:[{
                     type: "linear",
                     ticks: {
+                        maxTicksLimit: 15,
                         min: 0,
                         //приводим числа на оси к виду 10^n
                         callback: function(value) {
-                            if (document.getElementById('logscale').value == 1) {
-                                if((value === 0) || (value === 1) || (value === 10) || (value === 100)) return value;
-                                else if (value%10 === 0) {
-                                    if(Math.log10(Number(value)) == Math.log10(Number(value)).toPrecision(1))
-                                        return  "10^" + Math.log10(Number(value)).toString();
-                                }
-                                else return "";
+                            if(Number(value)==0){
+                                return value;
                             }
-                            else if(Number(value)>=10000){
-                                let arr = value.toString().split('.');
-                                let len = arr[0].length;
-                                let val = value.toString().substring(0, 3);
-                                let symb = len - 3;
-                                return val+" * 10^"+symb;
-                            }
-                            else return value;
+                            else return Number(value).toExponential();
                         },
                     }
                 }],
