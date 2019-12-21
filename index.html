@@ -37,45 +37,45 @@
         </select>
     </div>
     <div class="nav">
-        <label for="ed">Ed</label>
+        <label for="ed"><span>E</span><sub>d</sub></label>
         <input id="ed" type="number" min="0" max="100" step="0.01" value="0.1" style="margin-left: 10px"><label style="margin-left: 10px"/>eV
     </div>
     <div class="nav">
-        <label for="nd">Nd</label>
-        <input id="nd" type="range" max="1000" min="0" value="10" step="1" list="range" style="width: 170px" onchange="document.getElementById('nd_val').value = this.value;">
+        <label for="nd"><span>N</span><sub>d</sub></label>
+        <input id="nd" type="range" max="100000" min="0" value="10" step="1" list="range" style="width: 170px" onchange="document.getElementById('nd_val').value = this.value;">
         <datalist id="range">
             <option value="0" label="0">
-            <option value="200" label="200">
-            <option value="400" label="400">
-            <option value="600" label="600">
-            <option value="800" label="800">
-            <option value="1000" label="1000">
+            <option value="20000" label="20000">
+            <option value="40000" label="40000">
+            <option value="60000" label="60000">
+            <option value="80000" label="80000">
+            <option value="100000" label="100000">
         </datalist>
-        <input id="nd_val" type="number" min="0" max="1000" step="1" value="10" style="margin-left: 10px" onchange="document.getElementById('nd').value = this.value;"><label style="margin-left: 10px"><span>*10</span><sup>15</sup><span> cm</span><sup>-3</sup></label>
+        <input id="nd_val" type="number" min="0" max="100000" step="1" value="10" style="margin-left: 10px" onchange="document.getElementById('nd').value = this.value;"><label style="margin-left: 10px"><span>*10</span><sup>15</sup><span> cm</span><sup>-3</sup></label>
     </div>
     <div class="nav">
-        <label for="ea">Ea</label>
+        <label for="ea"><span>E</span><sub>a</sub></label>
         <input id="ea" type="number" min="0" max="100" step="0.01" value="0.1" style="margin-left: 10px"><label style="margin-left: 10px"/>eV
     </div>
     <div class="nav">
-        <label for="na">Na</label>
-        <input id="na" type="range" max="1000" min="0" value="0" step="1" list="range_a" style="width: 170px" onchange="document.getElementById('na_val').value = this.value;">
+        <label for="na"><span>N</span><sub>a</sub></label>
+        <input id="na" type="range" max="100000" min="0" value="0" step="1" list="range_a" style="width: 170px" onchange="document.getElementById('na_val').value = this.value;">
         <datalist id="range_a">
             <option value="0" label="0">
-            <option value="200" label="200">
-            <option value="400" label="400">
-            <option value="600" label="600">
-            <option value="800" label="800">
-            <option value="1000" label="1000">
+            <option value="20000" label="20000">
+            <option value="40000" label="40000">
+            <option value="60000" label="60000">
+            <option value="80000" label="80000">
+            <option value="100000" label="100000">
         </datalist>
-        <input id="na_val" type="number" min="0" max="1000" step="1" value="0" style="margin-left: 10px" onchange="document.getElementById('na').value = this.value;"><label style="margin-left: 10px"><span>*10</span><sup>15</sup><span> cm</span><sup>-3</sup></label>
+        <input id="na_val" type="number" min="0" max="100000" step="1" value="0" style="margin-left: 10px" onchange="document.getElementById('na').value = this.value;"><label style="margin-left: 10px"><span>*10</span><sup>15</sup><span> cm</span><sup>-3</sup></label>
     </div>
     <div class="nav">
-        <label for="t_min">Tmin</label>
+        <label for="t_min"><span>T</span><sub>min</sub></label>
         <input id="t_min" type="number" min="0" max="1000" step="1" value="200" style="margin-left: 10px"><label style="margin-left: 10px"/>K
     </div>
     <div class="nav">
-        <label for="t_max">Tmax</label>
+        <label for="t_max"><span>T</span><sub>max</sub></label>
         <input id="t_max" type="number" min="0" max="1000" step="1" value="1000" style="margin-left: 10px"><label style="margin-left: 10px"/>K
     </div>
     <div class="nav">

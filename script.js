@@ -90,43 +90,43 @@ function redraw(){
     let arr = [];
     if(mode == "Electron mobility") {
         arr = mue;
-        window.myScatter.data.datasets[0].label = 'Electron mobility';
+        window.myScatter.options.title.text = 'Electron mobility';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
     }
     else if(mode == "Hole mobility") {
         arr = muh;
-        window.myScatter.data.datasets[0].label = 'Hole mobility';
+        window.myScatter.options.title.text = 'Hole mobility';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
     }
     else if(mode == "Electron concentration") {
         arr = n;
-        window.myScatter.data.datasets[0].label = 'Electron concentration';
+        window.myScatter.options.title.text = 'Electron concentration';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
     }
     else if(mode == "Hole concentration") {
         arr = p;
-        window.myScatter.data.datasets[0].label = 'Hole concentration';
+        window.myScatter.options.title.text = 'Hole concentration';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
     }
     else if(mode == "Charged donor concentration") {
         arr = NdPlus;
-        window.myScatter.data.datasets[0].label = 'Charged donor concentration';
+        window.myScatter.options.title.text = 'Charged donor concentration';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
     }
     else if(mode == "Charged acceptor concentration") {
         arr = NaMinus;
-        window.myScatter.data.datasets[0].label = 'Charged acceptor concentration';
+        window.myScatter.options.title.text = 'Charged acceptor concentration';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
     }
     else if(mode == "Conductivity") {
         arr = sigma;
-        window.myScatter.data.datasets[0].label = 'Conductivity';
+        window.myScatter.options.title.text = 'Conductivity';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 102, 0, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 102, 0, 1)';
     }
@@ -165,7 +165,7 @@ window.onload = function() {
             data: data,
             fill: false,
             pointBorderColor: 'rgba( 0, 0, 255, 1)',
-            label: "Electron mobility",
+            pointHoverRadius: 4,
         }]
     };
 
@@ -176,12 +176,19 @@ window.onload = function() {
         type: 'line',
         data: scatterChartData,
         options: {
+            title: {
+                display: true,
+                text: "Electron mobility",
+            },
+            legend: {
+                display: false
+            },
+            tooltips: {
+                enabled: true,
+            },
             scales: {
                 xAxes:[{
                     type: "linear",
-                    /*ticks: {
-                        min: 0,
-                    },*/
                     scaleLabel:{
                         display:true,
                         labelString:"T, K",
@@ -200,6 +207,13 @@ window.onload = function() {
                                         return  "10^" + Math.log10(Number(value)).toString();
                                 }
                                 else return "";
+                            }
+                            else if(Number(value)>=10000){
+                                let arr = value.toString().split('.');
+                                let len = arr[0].length;
+                                let val = value.toString().substring(0, 3);
+                                let symb = len - 3;
+                                return val+" * 10^"+symb;
                             }
                             else return value;
                         },
