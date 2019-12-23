@@ -42,7 +42,7 @@ function getNaMinus(Na0, Ea, Ef, T){
 }
 
 function getNdPlus(Nd0, Ed, Ef, T){
-    return Nd0/(1+Math.exp((Ef-Ed)/(constatnt.k*T)));
+    return Nd0/(1+Math.exp((params.Eg - Ef-Ed)/(constatnt.k*T)));
 }
 
 function getConductivity(n, p, mue, mup){
@@ -52,14 +52,14 @@ function getConductivity(n, p, mue, mup){
 function func(Ef,Nc, Nv, T, Na0, Nd0, Eg, Ea, Ed){
     let n = getN (Nc, Eg, Ef, T);
     let p = getP (Nv, Ef, T);
-    let NdPlus = getNdPlus (T, Ed, Ef, Nd0);
-    let NaMinus = getNaMinus (T, Ea, Ef, Na0);
+    let NdPlus = getNdPlus (Nd0, Ed, Ef, T);
+    let NaMinus = getNaMinus (Na0, Ea, Ef, T);
     return NdPlus + p - n - NaMinus;
 }
 
 function getFermi(Nc, Nv, T, Na0, Nd0, Eg, Ea, Ed) {
     let left = 0;
-    let right = 1e2;
+    let right = 10.0;
     let middle = (left + right) / 2.0;
     let fm = func(middle,Nc,Nv,T,Na0,Nd0,Eg,Ea,Ed);
     let iters = 0;
@@ -77,6 +77,7 @@ function getFermi(Nc, Nv, T, Na0, Nd0, Eg, Ea, Ed) {
         fm = func(middle,Nc,Nv,T,Na0,Nd0,Eg,Ea,Ed);
         ++iters;
     }
+    console.log(middle, fm, Nc, Nv, T, Na0, Nd0, Eg, Ea, Ed);
     return middle;
 }
 
@@ -91,14 +92,12 @@ function redraw(){
     if(mode == "Electron mobility") {
         arr = mue;
         window.myScatter.options.title.text = 'Electron mobility';
-        window.myScatter.options.scales.yAxes[0].scaleLabel.labelString = 'Electron mobility';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
     }
     else if(mode == "Hole mobility") {
         arr = muh;
         window.myScatter.options.title.text = 'Hole mobility';
-        window.myScatter.options.scales.yAxes[0].scaleLabel.labelString = 'Hole mobility';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
     }
@@ -197,10 +196,6 @@ window.onload = function() {
                     }
                 }],
                 yAxes:[{
-                    scaleLabel:{
-                        display:true,
-                        labelString:"..",
-                    },
                     type: "linear",
                     ticks: {
                         maxTicksLimit: 15,
@@ -256,7 +251,7 @@ window.onload = function() {
     });
 
     document.getElementById('ed').addEventListener('change', function () {
-        params.Ed = document.getElementById('ed').value;
+        params.Ed = Number(document.getElementById('ed').value);
         fillArrays();
         redraw()
     });
@@ -315,7 +310,7 @@ function fillArrays() {
     for(let t = params.TMin; t<=params.TMax; t+=params.TCount){
         Nc.push(getEffectiveDensityState(params.me, t));
         Nv.push(getEffectiveDensityState(params.mh, t));
-        let Ef = getFermi(Nc[count], Nv[count], t, params.Na0/Math.pow(10,15), params.Nd0/Math.pow(10,15), params.Eg, params.Ea, params.Ed);
+        let Ef = getFermi(Nc[count], Nv[count], t, params.Na0, params.Nd0, params.Eg, params.Ea, params.Ed);
         n.push(getN(Nc[count], params.Eg, Ef, t));
         p.push(getP(Nv[count], Ef, t));
         NdPlus.push(getNdPlus(params.Nd0, params.Ed, Ef, t));
