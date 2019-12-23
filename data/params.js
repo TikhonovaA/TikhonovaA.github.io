@@ -3,7 +3,7 @@ var params = {
     "Ed": 0.1,
     "Nd0": 10*Math.pow(10,15),
     "Ea": 0.1,
-    "Na0": Math.pow(10,15),
+    "Na0": 0,
     "me": 9.11*Math.pow(10,-28),
     "mh": 4.5*Math.pow(10,-28),
     "Eg": 1.12,
