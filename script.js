@@ -91,12 +91,14 @@ function redraw(){
     if(mode == "Electron mobility") {
         arr = mue;
         window.myScatter.options.title.text = 'Electron mobility';
+        window.myScatter.options.scales.yAxes[0].scaleLabel.labelString = 'Electron mobility';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 0, 0, 255, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 0, 0, 255, 1)';
     }
     else if(mode == "Hole mobility") {
         arr = muh;
         window.myScatter.options.title.text = 'Hole mobility';
+        window.myScatter.options.scales.yAxes[0].scaleLabel.labelString = 'Hole mobility';
         window.myScatter.data.datasets[0].borderColor = 'rgba( 255, 0, 0, 1)';
         window.myScatter.data.datasets[0].pointBorderColor = 'rgba( 255, 0, 0, 1)';
     }
@@ -195,6 +197,10 @@ window.onload = function() {
                     }
                 }],
                 yAxes:[{
+                    scaleLabel:{
+                        display:true,
+                        labelString:"..",
+                    },
                     type: "linear",
                     ticks: {
                         maxTicksLimit: 15,
@@ -312,8 +318,8 @@ function fillArrays() {
         let Ef = getFermi(Nc[count], Nv[count], t, params.Na0/Math.pow(10,15), params.Nd0/Math.pow(10,15), params.Eg, params.Ea, params.Ed);
         n.push(getN(Nc[count], params.Eg, Ef, t));
         p.push(getP(Nv[count], Ef, t));
-        NdPlus.push(getNdPlus(Nc[count], params.Ed, Ef, t));
-        NaMinus.push(getNaMinus(Nv[count], params.Ea, Ef,t));
+        NdPlus.push(getNdPlus(params.Nd0, params.Ed, Ef, t));
+        NaMinus.push(getNaMinus(params.Na0, params.Ea, Ef,t));
         mue.push(getMobility(params.ae, params.be, params.Nd0, params.Na0, t));
         muh.push(getMobility(params.ah, params.bh, params.Nd0, params.Na0, t));
         sigma.push(getConductivity(n[count], p[count], mue[count],muh[count]));
