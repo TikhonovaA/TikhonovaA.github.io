@@ -671,7 +671,7 @@ function updateChart(new_atom, min, maxW){
     }
     if (letter.length > 0) {
         $.ajax({
-            url:"https://grotrian.nsu.ru/getdata.php",
+            url:"http://grotrian.nsu.ru/getdata.php",
             type: "post",
             dataType: "json",
             async: false,
