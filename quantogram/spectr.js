@@ -375,7 +375,7 @@ document.getElementById('eUp_eD').addEventListener('click', function() {
 document.getElementById('resetZoom').addEventListener('click', function() {
     myScatter.resetZoom();
     window.myScatter.update();
-    drawbottomAxis(hashConfig);
+    displayWidth();
 });
 
 function resize(click) {
@@ -448,24 +448,7 @@ function resize(click) {
 
     window.myScatter.options.title.text = 'Transitions of ' + document.getElementById("element").value;
     window.myScatter.update();
-    drawbottomAxis(hashConfig);
-}
-
-var widthRad = document.getElementsByName('width');
-for (var i = 0; i < widthRad.length; i++) {
-    widthRad[i].addEventListener('change', function () {
-        if (this.value == 1) {
-
-        }
-    });
-}
-
-            function click_1() {
-    console.log("1");
-}
-
-function click_2() {
-    console.log("2");
+    displayWidth();
 }
 
 //переключение размерности
@@ -545,7 +528,7 @@ for (var i = 0; i < rad.length; i++) {
             myScatter.options.scales.yAxes[0].ticks.suggestedMax = max;
             myScatter.resetZoom();
             window.myScatter.update();
-            drawbottomAxis(hashConfig);
+            displayWidth();
         }
         else {   //размерность evV
             ev = true;
@@ -624,7 +607,7 @@ for (var i = 0; i < rad.length; i++) {
             myScatter.options.scales.yAxes[0].ticks.suggestedMax = max;
             myScatter.resetZoom();
             window.myScatter.update();
-            drawbottomAxis(hashConfig);
+            displayWidth();
         }
         myScatter.options.scales.yAxes[0].scaleLabel.labelString = part1Y + part2;
         myScatter.options.scales.xAxes[0].scaleLabel.labelString = part1X + part2;
@@ -1057,23 +1040,18 @@ function updateChart(new_atom, min, maxW){
                         labels: termLabel,
                     };
 
-                    let c = 0;
-                    for (let elem of hashAtomicResidue.values()) {
-                        let setOfConfig = {
-                            pointBorderWidth: 0,
-                            pointRadius: 0,
-                            data: [{x: elem.min, y: 0}, {x: elem.min, y: max+10000}, {x: elem.max, y: max+10000}, {x: elem.max, y: 0}],
-                            showLine: true,
-                            fill: true,
-                            borderColor: barColors[c],
-                            borderWidth: 1,
-                            backgroundColor: barColors[c],
-                            pointHoverRadius: 0,
-                            pointHitRadius: 0
-                        };
-                        scatterChartData.datasets.push(setOfConfig);
-                        c++;
-                        if(c==svgColors.length) c = 0;
+                    let elemArr = document.getElementsByName("width");
+                    if(elemArr[0].checked) {
+                        fillDatasets(hashFullConfig);
+                        drawbottomAxis(hashFullConfig);
+                    }
+                    if(elemArr[1].checked) {
+                        fillDatasets(hashAtomicResidue);
+                        drawbottomAxis(hashAtomicResidue);
+                    }
+                    if(elemArr[2].checked) {
+                        fillDatasets(hashTerm);
+                        drawbottomAxis(hashTerm);
                     }
 
                     resize(0);
@@ -1082,7 +1060,6 @@ function updateChart(new_atom, min, maxW){
                     myScatter.options.scales.xAxes[0].ticks.suggestedMax = max;
                     myScatter.options.scales.yAxes[0].ticks.suggestedMax = max;
                     window.myScatter.update();
-                    drawbottomAxis(hashConfig);
                 }
             )
         })
@@ -1366,49 +1343,6 @@ function click_random() {
 
 updateChart(1, 0, 0);
 
-function drawbottomAxis(table){
-    let width = myScatter.canvas.width;
-    let ruler = "<svg width='" + width + "' height='65' id='ruler' style='background-color:white;'>";
-    let near = [];
-    let n = 0;
-    for (let elem of table.values()) {
-        let max_pixel = myScatter.getDatasetMeta(0).data[elem.n_max]._model.x;
-        let min_pixel = myScatter.getDatasetMeta(0).data[elem.n_min]._model.x;
-        let pr = (max_pixel - min_pixel) / width*25+7;
-        pr = pr > 35 ? 35 : pr;
-        if(max_pixel == min_pixel)
-            ruler += "<line x1='" + min_pixel + "' y1='0' x2='" + min_pixel + "' y2='" + pr + "' stroke-width='1' stroke='" + svgColors[n] + "'></line>";
-        else {
-            ruler += "<line x1='" + min_pixel + "' y1='0' x2='" + min_pixel + "' y2='" + pr + "' stroke-width='1' stroke='" + svgColors[n] + "'></line>";
-            ruler += "<line x1='" + min_pixel + "' y1='" + pr + "' x2='" + max_pixel + "' y2='" + pr + "' stroke-width='1' stroke='" + svgColors[n] + "'></line>";
-            ruler += "<line x1='" + max_pixel + "' y1='0' x2='" + max_pixel + "' y2='" + pr + "' stroke-width='1' stroke='" + svgColors[n] + "'></line>";
-        }
-        let mid = (max_pixel + min_pixel) / 2;
-        let cl = false;
-        let gap = elem.config.replace(/\<sub\>/gi, "").replace(/\<\/sub\>/gi, "").replace(/\<sup\>/gi, "").replace(/\<\/sup\>/gi, "").length * 7;
-        for(let i = 0; i<near.length; i++){
-            if(Math.abs(near[i]-mid)<gap) {
-                cl = true;
-                break;
-            }
-        }
-        if (!cl){
-            ruler += "<text x='" + mid + "' y='" + (pr+20) + "' fill='" + svgColors[n] + "' style='text-anchor: Middle;'><tspan>"
-                + elem.config.replace(/\<sup\>/gi, "</tspan><tspan dy='-9' style='font-size:11px;'>")
-                .replace(/\<\/sup\>/gi, "</tspan><tspan dy='9'>")
-                .replace(/\<sub\>/gi, "</tspan><tspan dy='9' style='font-size:11px;'>")
-                .replace(/\<\/sub\>/gi, "</tspan><tspan dy='-9'>")
-                + "</tspan></text>";
-            near.push(mid);
-        }
-        n++;
-        if(n==svgColors.length) n = 0;
-    }
-    ruler+= "</svg>";
-    $('#ruler').remove();
-    $('#chartCont').append(ruler);
-}
-
 document.getElementById('chartCont').addEventListener('mousedown', function() {
     isdown = true;
 });
@@ -1418,7 +1352,7 @@ document.getElementById('chartCont').addEventListener('mouseup', function() {
 });
 
 document.getElementById('chartCont').addEventListener('wheel', function() {
-    drawbottomAxis(hashConfig);
+    displayWidth();
 });
 
 document.getElementById('chartCont').addEventListener('click', function(evt) {
@@ -1523,7 +1457,7 @@ document.getElementById('chartCont').addEventListener('click', function(evt) {
 });
 
 document.getElementById('chartCont').addEventListener('mousemove', function(evt) {
-    if(isdown) drawbottomAxis(hashConfig);
+    if(isdown) displayWidth();
     let point = myScatter.getElementAtEvent(evt)[0];
     if (!point) {
         if(!document.getElementById('chartjs-tooltip').hidden)
@@ -1531,3 +1465,103 @@ document.getElementById('chartCont').addEventListener('mousemove', function(evt)
     }
     else document.getElementById('chartjs-tooltip').hidden=false;
 });
+
+function displayWidth() {
+    var elemArr = document.getElementsByName("width");
+    if(elemArr[0].checked) {drawbottomAxis(hashFullConfig);}
+    if(elemArr[1].checked) {drawbottomAxis(hashAtomicResidue);}
+    if(elemArr[2].checked) {drawbottomAxis(hashTerm);}
+}
+
+function drawbottomAxis(table){
+    let width = myScatter.canvas.width;
+    let ruler = "<svg width='" + width + "' height='65' id='ruler' style='background-color:white;'>";
+    let near = [];
+    let n = 0;
+    for (let elem of table.values()) {
+        let max_pixel = myScatter.getDatasetMeta(0).data[elem.n_max]._model.x;
+        let min_pixel = myScatter.getDatasetMeta(0).data[elem.n_min]._model.x;
+        let pr = (max_pixel - min_pixel) / width*25+7;
+        pr = pr > 35 ? 35 : pr;
+        if(max_pixel == min_pixel)
+            ruler += "<line x1='" + min_pixel + "' y1='0' x2='" + min_pixel + "' y2='" + pr + "' stroke-width='1' stroke='" + svgColors[n] + "'></line>";
+        else {
+            ruler += "<line x1='" + min_pixel + "' y1='0' x2='" + min_pixel + "' y2='" + pr + "' stroke-width='1' stroke='" + svgColors[n] + "'></line>";
+            ruler += "<line x1='" + min_pixel + "' y1='" + pr + "' x2='" + max_pixel + "' y2='" + pr + "' stroke-width='1' stroke='" + svgColors[n] + "'></line>";
+            ruler += "<line x1='" + max_pixel + "' y1='0' x2='" + max_pixel + "' y2='" + pr + "' stroke-width='1' stroke='" + svgColors[n] + "'></line>";
+        }
+        let mid = (max_pixel + min_pixel) / 2;
+        let cl = false;
+        let gap = elem.config.replace(/\<sub\>/gi, "").replace(/\<\/sub\>/gi, "").replace(/\<sup\>/gi, "").replace(/\<\/sup\>/gi, "").length * 7;
+        for(let i = 0; i<near.length; i++){
+            if(Math.abs(near[i]-mid)<gap) {
+                cl = true;
+                break;
+            }
+        }
+        if (!cl){
+            ruler += "<text x='" + mid + "' y='" + (pr+20) + "' fill='" + svgColors[n] + "' style='text-anchor: Middle;'><tspan>"
+                + elem.config.replace(/\<sup\>/gi, "</tspan><tspan dy='-9' style='font-size:11px;'>")
+                    .replace(/\<\/sup\>/gi, "</tspan><tspan dy='9'>")
+                    .replace(/\<sub\>/gi, "</tspan><tspan dy='9' style='font-size:11px;'>")
+                    .replace(/\<\/sub\>/gi, "</tspan><tspan dy='-9'>")
+                + "</tspan></text>";
+            near.push(mid);
+        }
+        n++;
+        if(n==svgColors.length) n = 0;
+    }
+    ruler+= "</svg>";
+    $('#ruler').remove();
+    $('#chartCont').append(ruler);
+}
+
+function fillDatasets(hashMap) {
+    if(scatterChartData.datasets.length != 4){
+        while (scatterChartData.datasets.length != 4) scatterChartData.datasets.pop();
+    }
+    let c = 0;
+    for (let elem of hashMap.values()) {
+        let setOfConfig = {
+            pointBorderWidth: 0,
+            pointRadius: 0,
+            data: [{x: elem.min, y: 0}, {x: elem.min, y: max+10000}, {x: elem.max, y: max+10000}, {x: elem.max, y: 0}],
+            showLine: true,
+            fill: true,
+            borderColor: barColors[c],
+            borderWidth: 1,
+            backgroundColor: barColors[c],
+            pointHoverRadius: 0,
+            pointHitRadius: 0
+        };
+        scatterChartData.datasets.push(setOfConfig);
+        c++;
+        if(c==svgColors.length) c = 0;
+    }
+    window.myScatter.update();
+}
+
+var widthRad = document.getElementsByName('width');
+for (var i = 0; i < widthRad.length; i++) {
+    widthRad[i].addEventListener('change', function () {
+        if (this.value == 1) {
+            fillDatasets(hashFullConfig);
+            drawbottomAxis(hashFullConfig);
+        }
+        if (this.value == 2) {
+            fillDatasets(hashAtomicResidue);
+            drawbottomAxis(hashAtomicResidue);
+        }
+        if (this.value == 3) {
+            fillDatasets(hashTerm);
+            drawbottomAxis(hashTerm);
+        }
+        if (this.value == 4) {
+            if(scatterChartData.datasets.length != 4){
+                while (scatterChartData.datasets.length != 4) scatterChartData.datasets.pop();
+            }
+            $('#ruler').remove();
+        }
+        window.myScatter.update();
+    });
+}
